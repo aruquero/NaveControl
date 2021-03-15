@@ -1,6 +1,7 @@
 # Nave Sistema Solar
 
 ![N|Solid](https://i.gyazo.com/c1ebc76c699252789da35563f5f69753.jpg)
+
 # Indice
 
   - Introducción
@@ -29,8 +30,7 @@ Posteriormente pulsando la tecla "espacio" podemos acceder al modo en primera pe
 
 **Decisiones de diseño**:
 
-Se ha añadido un comentario sobre la incapacidad de maximizar la aplicación debido al tamaño de la imagen de fondo. Al tener una dimensiones prederteminadas esta no puede ser adaptada para ocupar la pantalla correctamente.
-Por otra parte se ha decidido que los planetas pertenezcan a un planeta mayor, es decir, el array de planetas ya mencionado. Esto implica una ejecución recursiva para calcular las rotaciones de los mismos, no obstante es la manera más sencilla de poder añadir sistematicamente más astros a nuestro sistema sin necesidad de sobreescribir el código.
+Se ha decidido implementar una vista lateral con la nave volteada para favorecer el movimiento y la transición al pasar a primera persona, esto ayuda a mantener una orientación de donde se encuentra la nave y así no perder las proporciones del sistema. En primera persona los controles de las flechas se invierten para dar paso al "Control" y "Shift" como teclas de movmiento vertical, mientras que las flechas continuan con su funcion sobre el eje "X" y "Z".
 
 ![N|Solid](https://i.gyazo.com/bd5985020a59bdae5119499050f8a65e.jpg)
 
@@ -43,6 +43,7 @@ Tercera persona:
   -Movimiento lateral y horizontal con las flechas del teclado.
   -Movimiento vertical, con el CONTROL y SHIFT respectivamente.
 Para alternar entre las vistas usamos la tecla "espacio".
+
 **Gif sobre el funcionamiento**
 
 ![Alt Text](https://i.gyazo.com/e649d74b9f4904642052ea87205ab64f.mp4)
