@@ -1,9 +1,10 @@
 Planeta sol, tierra;
 PShape ship;                                                          //Pshape para el modelo de la nave
 float horizontal, vertical, profundidad;                              //Valores para controlar las coordenadas de la nave
-int k,camara;                                                         //Variables para controlar el KeyCode y la cámara(saber si está en primera o tercera)
+int k,camara,value;                                                   //Variables para controlar el KeyCode, el tutorial y la cámara(saber si está en primera o tercera)
 boolean arriba, abajo, derecha, izquierda, delante, detras;           //Variables booleanas para controlar el desplazamiento de la nave
 byte SPX = 30, SPY = 20, SPZ = 20;                                    //Velocidad de desplazamiento en los respectivos ejes
+PFont f;   
 void setup(){
  size(1280,720,P3D);
  sol = new Planeta(50,0,0,0,"imagenes/sol.jpg");
@@ -20,30 +21,46 @@ void setup(){
  vertical = 10;
  profundidad = 360;
  camara = 1;
+ value = 1;
+ f = createFont("Arial",16,true);
 }
 
 void draw(){
- background(loadImage("imagenes/fondosistemasolar.jpg")); 
- pointLight(255, 255, 255, 640, 360, 100);
- translate(width/2,height/2);
- sol.show();
- sol.orbitar();
- textAlign(LEFT);
- textSize(20);
- fill(255);
- text("Pulsa la tecla 'ESC' para cerrar el programa",-620,340);
- text("El programa puede dejar de funcionar al intentar maximizar la aplicación",-620,300);
- //if para controlar el cambio de cámaras entre primera y tercera persona.
- if(camara == -1){
-   camera(horizontal, vertical, profundidad, horizontal+10, vertical, profundidad,0.0,1.0,0.0);
-   shape(ship,horizontal,vertical,profundidad,40);
-   
- }else{
-   camera(640,360,660,640,360,0,0.0,1.0,0.0);
-   shape(ship,horizontal,vertical,40,40);
- }
- moverNave();
-}
+  if(value == 1){
+      background(255);
+      textFont(f);
+      fill(0);
+      text("Pulsa la tecla 'Enter' para empezar",width/2-190,200);
+      text("Pulsa la tecla 'espacio' para alternar entre primera y tercera persona", width/2-190, 230);
+      text("En tercera persona:", width/2-190, 260);
+      text("Pulsa las flechas del teclado para desplazar la nave", width/2-190,290);
+      text("En primera persona:",width/2-190,320);
+      text("Pulsa las flechas del teclado para desplazarte horizontal y lateralmente",width/2-190,350);
+      text("Pulsa 'Control' y 'Shift' para cambiar la componente vertical de la nave",width/2-190,380);
+      
+  }else{
+     background(loadImage("imagenes/fondosistemasolar.jpg")); 
+     pointLight(255, 255, 255, 640, 360, 100);
+     translate(width/2,height/2);
+     sol.show();
+     sol.orbitar();
+     textAlign(LEFT);
+     textSize(20);
+     fill(255);
+     text("Pulsa la tecla 'ESC' para cerrar el programa",-620,340);
+     text("El programa puede dejar de funcionar al intentar maximizar la aplicación",-620,300);
+     //if para controlar el cambio de cámaras entre primera y tercera persona.
+     if(camara == -1){
+       camera(horizontal, vertical, profundidad, horizontal+10, vertical, profundidad,0.0,1.0,0.0);
+       shape(ship,horizontal,vertical,profundidad,40);
+     }else{
+       camera(640,360,660,640,360,0,0.0,1.0,0.0);
+       shape(ship,horizontal,vertical,40,40);
+     }
+     moverNave();
+   }
+}  
+
 
 void keyPressed(){
   k = keyCode;
@@ -63,6 +80,7 @@ void keyPressed(){
   else if (k == RIGHT) derecha = aux;
   else if (k == CONTROL) delante = aux;
   else if (k == SHIFT) detras = aux;
+  else if (k == ENTER) value = 0;
  }
 //Método  para mover la nave.
   void moverNave(){
